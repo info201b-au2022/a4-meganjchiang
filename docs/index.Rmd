@@ -1,7 +1,7 @@
 ---
-title: "Your A4 Report Title (TODO: Revise title)"
-author: "Your Name"
-date: '2022-11-01'
+title: "Racial Disparities in the U.S. Prison System"
+author: "Megan Chiang"
+date: '2022-11-21'
 output: html_document
 ---
 
@@ -11,35 +11,71 @@ source("../source/analysis.R")
 ```
 
 ## Abstract 
-[TODO: Include a short abstract (about 50 words)]
+This report uses the Vera Institute of Justice's incarceration trends dataset to analyze how Black people are disproportionately incarcerated in the United States. This occurs in all regions of the United States, but it is most apparent in the Midwest and South.
 
-# Test (TODO: Remove before submission!!)
+## Section 1: Introduction 
+This report aims to investigate the racial disparities within the U.S. prison system, specifically the disproportionate number of Black people incarcerated. The data is taken from the Vera Institute of Justice's [incarceration trends dataset](https://github.com/vera-institute/incarceration-trends), which contains general population counts and prison population counts for every county in the United States from 1970 to 2018. These counts are broken down by different demographics, such as race and gender. 
+
+I decided to focus my report on the the data related to Black people. As the [Vera Institute](https://www.vera.org/publications/for-the-record-unjust-burden) states, Black people are incarcerated at a rate about five times greater than that of white people. I wanted to see if the trends in this dataset align with this fact.
+ 
+Some **direct stakeholders** who are impacted by research into this dataset include:     
+
+* Americans who have been incarcerated
+* Policymakers and government officials
+
+Some **indirect stakeholders** who are impacted by research into this dataset include:   
+
+* American citizens who want an insight into incarceration trends over time
+
+Some of the **key values** needed to conduct research with this dataset are: 
+
+* justice
+* fairness
+* community
+* human dignity
+
+## Section 2: Data Summary 
+I was first interested in seeing the change in jail population from 1970 to 2018. I wanted to see which states had the highest and lowest change. I found that the state with the lowest percent change was **`r state_min_change`**, with a change of **`r min_change`%**. The state with the highest percent change was **`r state_max_change`**, with a change of **`r max_change`%**. It is important to see if the populations have or have not drastically changed over time; data scientists, policymakers, and citizens can further investigate into why certain regions/areas have certain changes. 
+
+I then wanted to see which county in the United States had the most disproportionate amount of Black people in jail compared to its total Black population in 2018. I found that the county was **`r county_black_disproportionate`**. It is important to see the area with the most disproportion so people know where to direct their attention.
+
+Finally, I wanted to find the difference between the proportion of Black people in jail and the proportion of Black 
+people in the county's total population for **`r county_black_disproportionate`**. The difference was **`r diff_prop`**.
+
+## Section 3: Growth of the U.S. Prison Population
+
 ```{r echo=FALSE}
-q1_string <- test_query1()
-num <- 5
-```
-As you know, this is a markdown report. The [R Markdown Cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf) is **useful!**
-
-* Here's a test of a dynamic variable. Say **"`r q1_string`!!!** 
-* Here's another test. A vector
-of numbers: `r test_query2(num)`.
-
-Recall that _{r echo=TRUE}_ can be used to display the code, 
-which is very useful when developing and debugging a report. Here's an example: 
-
-```{r echo=TRUE}
-num <- 5
-sum <- sum(test_query2(num))
-print(sum)
+plot_jail_pop_for_us
 ```
 
-## Introduction 
-[TODO]
+This bar chart shows that from 1970 to 2018, there was a general increase in the total jail population in the United States, going from about 150,000 people to 750,000 people. This increase became more significant in the 1980s, and the rate of the increase stayed about the same until the 2010s.
 
-## Data Summary 
-[TODO]
+## Section 4: Growth of Prison Population by State
 
-[TODO ... other sections ... See Canvas for details]
+```{r echo=FALSE, message=FALSE}
+plot_jail_pop_by_states(c("CA", "TX", "NY", "WI")) 
+```
 
-_All the very best with your work!_
+This line chart shows the change in prison population for four states: California, Wisconsin, New York, and Texas. I chose these four states specifically because I wanted to represent all four regions: West, Northeast, Midwest, and South. The prison populations in California and Texas seemed to have the most change, but all four states had a general increase.
 
+## Section 5: Comparing the Proportion of Black People in the Prison Population and the Proportion of Black People in the Total Population in 2018 (Per Region)
+
+```{r echo=FALSE, fig.width = 13}
+plot_black_pop_by_region
+```
+
+**Question:** In 2018, of the nine divisions of the United States, which one has the greatest disparity between the proportion of Black people in the prison population and the proportion of Black people in the total population?
+
+**Answer based on the bar chart:** The South Atlantic, with a difference of _0.17959938_.
+
+In all nine divisions of the U.S., the proportion of Black people in jail is higher than the proportion of Black people in that region.
+
+## Section 6: A Map of the Difference in the Proportion of Black People in Prison vs. the Proportion of Black People in the General Population (Per County)
+
+```{r echo=FALSE}
+map_black_prop
+```
+
+Fig. 4. This map of the United States has a circle marker in each county, representing the difference in the proportion of Black people in prison and the proportion of Black people in the general population. The bigger the circle, the greater the difference.
+
+This map shows the differences between the proportion of Black people in prison and the proportion of Black people in the general population for each U.S. county in 2018. Many of the relatively large markers are in the Midwest and South.
